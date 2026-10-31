@@ -83,7 +83,11 @@ export const TextInput = ({
     onChange?.(event.target.value);
   };
   useEffect(() => {
-    setInternalText(getValue(value, shouldTrim));
+    setInternalText((currentText) =>
+      getValue(currentText, shouldTrim) === getValue(value, shouldTrim)
+        ? currentText
+        : getValue(value, shouldTrim),
+    );
   }, [value, shouldTrim]);
 
   useRegisterInputEvents({
